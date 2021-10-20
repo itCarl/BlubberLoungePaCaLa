@@ -1,0 +1,238 @@
+:root {
+    --clr-primary: #fff;
+    --clr-secondary: rgb(174, 0, 255);
+
+    --clr-link-primary: rgb(52, 190, 40);
+    --clr-link-secondary: #fff;
+}
+
+/* 
+*  TABLE OF CONTENTS
+*  
+*  1.0 - Reset
+*  2.0 - Globals
+*  3.0 - Typography
+*  4.0 - Layouts
+*    4.1 - 3dModel - Section
+*    4.2 - info    - Section
+*  5.0 - Components
+*    5.1 - Forms
+*    5.2 - Buttons
+*  6.0 - Utillity
+*
+*/
+
+
+
+/*  ================================
+        1.0 Reset
+    ================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+input,
+textarea,
+button {
+    border: 0;
+    outline: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+
+/*  ================================
+        2.0 Globals
+    ================================ */
+
+::selection {
+    color: var(--clr-primary);
+    background-color: var(--clr-secondary);
+}
+
+html,
+body,
+body::before {
+    height: 100vh; /* Fallback */
+    height: calc(var(--vh, 1vh) * 100);
+    width: 100%;
+    font-size: 15px;
+}
+
+body {    
+    --bg-opacity: 1;
+    color: var(--clr-primary);
+    background-color: #343434;
+    background-color: rgba(52,52,52,var(--bg-opacity));
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    letter-spacing: .03em;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+}
+/* 'fancy' background image
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .6;
+    background: url("../images/fleck-white.png");
+    z-index: -1;
+}
+*/
+
+
+
+/*  ================================
+        3.0 Typography
+    ================================ */
+
+a {
+    color: var(--clr-link-primary);
+    border-bottom: 1px solid;
+    text-decoration: none;
+}   
+
+p {
+    line-height: 1.7em;
+}
+
+h1 {
+    color: var(--clr-primary);
+}
+
+
+
+/*  ================================
+        4.0 Layouts
+    ================================ */
+.wrapper {
+    max-width: 95vw;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 55px 28px 28px;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+h1.title {
+    width: 100%;
+    text-align:center;
+}
+
+    /**
+     *      4.1 3dModel - Section
+     */
+section#model {
+    /*background-color: beige;*/
+    min-width: 40%;
+}
+
+
+    /**
+     *      4.2 info (left & right) - Section 
+     */
+section#info-left,
+section#info-right {
+    width: 100%;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 800px;
+}
+
+.info-content > .item {
+    width: 300px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+.info-content > .item > .icon {
+    text-align: center;
+    padding: .2em .2em;
+    font-size: 1.8em;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.info-content > .item > .item-content {
+    text-align: center;
+    color: #eee;
+    padding: 1em 1em;
+}
+
+/*  ================================
+        5.0 Components
+    ================================ */
+
+/* TODO make upload button more beautiful */
+
+    /**
+     *      5.2 Buttons
+     */
+.btn {
+    padding: 1em;
+}
+
+
+/*  ================================
+        6.0 Utillity
+    ================================ */
+.link-disabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+.link-disabled:hover {
+    border: 0 !important;
+    font-weight: normal !important;
+}
+
+
+
+
+
+/*
+@media screen and (max-width: 700px) {
+    .content {
+        top: 50%;
+    }
+}
+*/
+/*
+@media screen and (max-width: 530px) {
+    div.wrapper {
+        padding-top: 50px;
+    }
+    h1{
+        font-size:1.728em
+    }
+    section#social-links {
+        margin-top: 3em;
+    }
+}
+*/

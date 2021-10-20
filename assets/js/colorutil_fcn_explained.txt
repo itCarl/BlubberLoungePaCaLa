@@ -1,0 +1,157 @@
+function ColorFromPalette( currentPalette, colorIndex, brightness, currentBlending ) 
+{
+
+    /*
+        example:
+                             0%------- everything in between -------100%
+        examplePalette = [0x5500ab, 0xff0000, 0x00ff00, 0x0000ff, 0x0007f9]
+        requested parameter colorIndex=96 (x marks the spot)
+                              
+             0 -------- 64 ---x--- 128 ------- 192 -------- 255
+        0x5500ab-----0xff0000----0x00ff00----0x0000ff-----0x0007f9
+
+
+        colorIndex = (colorIndex%256) // allow it to wrap around
+
+        percent = (colorIndex/256)*100
+
+
+        prevColorStop = 0
+        nextColorStop = 0
+        colorSteps    = (256 / examplePalette.length-1)
+        find the colors wrapping the requested color
+        for(i=1; i < examplePalette.length-1; i++)
+            if colorSteps < colorIndex
+                prevColorStop = colorSteps * i
+            if colorSteps > colorIndex
+                nextColorStop = colorSteps * i
+                break;
+
+
+                clr1 would be 0xff0000 => indexed at 64
+                clr2 would be 0x00ff00 => indexed at 128
+        now... to get the color from a given palette clr1 and clr2 needs
+        to be interpolated & if the colorIndex isn't exactly in the middle 
+        of those 2 colors then a weight also needs to be calculated.
+
+        in this case clr2Index - colorIndex = 128-69 = 32 = DeltaIndex
+        weight = (DeltaIndex / ((128-64) / 2) / 2
+    
+     0xff0000                                                0x00ff00
+        64 -------------------------x------------------------- 128     absolute numbers
+                                 96 | 50%
+         0 -------------------------x------------------------- 100     percentage
+
+
+        calculated color = interpolate(clr1, clr2, weight)
+    */
+
+
+
+    // TODO get the nearest color from palette going down
+    var clr1 = 0; // color towards 0
+
+    // TODO get the nearest color from palette going up
+    var clr2 = 0; // color towards 255
+    
+    
+    
+    var calulatedColor = THREE.Color();
+
+    // calculate the weight of colorOne regarding the color index
+    const weightOfclr1 = 0;
+
+    // calculate the final color
+    calculatedColor.copy(clr1);
+    calculatedColor.lerp(clr2, weightOfclr1); // Linear interpolation
+    return calculatedColor.getHex();
+}
+
+// TODO write useful description
+/**
+ * This function does some cool stuff... will explain later 
+ * 
+ * @param {*} gpal 
+ * @returns 
+ */
+function loadDynamicGradientPalette( gpal )
+{
+    /*
+    typedef union {
+    struct {
+        uint8_t index;
+        uint8_t r;
+        uint8_t g;
+        uint8_t b;
+    };
+    uint32_t dword;
+    uint8_t  bytes[4];
+    } TRGBGradientPaletteEntryUnion;
+    */
+
+    // doing some tricky things right here... ? i guess... i dunno
+    // TRGBGradientPaletteEntryUnion* ent = (TRGBGradientPaletteEntryUnion*)(gpal);
+    // TRGBGradientPaletteEntryUnion u;
+
+    var colors = [];
+
+    var i = 0;
+    var u = gpal[0];
+
+
+    // Count entries
+    /*
+    uint16_t count = 0;
+    do {
+        u = *(ent + count);
+        ++count;
+    } while ( u.index != 255);
+
+    int8_t lastSlotUsed = -1;
+    */
+    var count = gpal.length;
+    var lastSlotUsed = -1;
+
+    /*
+    u = *ent;
+    CRGB rgbstart( u.r, u.g, u.b);
+    */
+
+    var rgbstart = [ gpal[i][0], gpal[i][1], gpal[i][2], gpal[i][3] ];
+
+    var indexstart = 0;
+    var istart8 = 0;
+    var iend8 = 0;
+    while( indexstart < 255) {
+        ++i;
+        u = gpal[i];
+        var indexend  = u[0];
+        var rgbend = [ gpal[i][0], gpal[i][1], gpal[i][2], gpal[i][3] ];
+        istart8 = indexstart / 16;
+        iend8   = indexend   / 16;
+        if( count < 16) 
+        {
+            if( (istart8 <= lastSlotUsed) && (lastSlotUsed < 15)) 
+            {
+                istart8 = lastSlotUsed + 1;
+                if( iend8 < istart8) 
+                {
+                    iend8 = istart8;
+                }
+            }
+            lastSlotUsed = iend8;
+        }
+
+        //colors.push(get_gradient_RGB( istart8, rgbstart, iend8, rgbend));
+
+        
+        get_gradient_RGB( istart8, rgbstart, iend8, rgbend).forEach((e) => {
+            colors.push(new THREE.Color( (e[0] << 16) | (e[1] << 8) | e[2]) );
+        });
+        
+
+        indexstart = indexend;
+        rgbstart = rgbend;
+    }
+    return colors;
+}

@@ -7,6 +7,15 @@
     <meta name="author" content="Maximilian Mewes">
     <title>Blubber Lounge - PaCaLa</title>
 
+
+    <meta rel="canonical" href="https://pacala.blubber-lounge.de/" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Blubber Lounge &amp; PaCaLa" />
+    <meta property="og:description" content="An ultimate visual experience, a portable party lamp with over 16 million colours and 100+ dynamic effects" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://pacala.blubber-lounge.de/" />
+    <meta property="og:image" content="" />  <!-- TODO -->
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/icons/favicon.ico">
 
@@ -37,6 +46,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <!--<link rel="stylesheet" href="assets\bootstrap-5.1.3\dist\css\bootstrap.min.css">-->
+
+    <!-- AOS (Animate On Scroll) -->
+    <!-- replaces my basic animations -->
+    <link rel="stylesheet" href="assets/css/aos.css">
     
     <!-- Core CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -69,14 +82,15 @@
                     </div>
                     <div class="col-10 col-sm-6 col-md-6 h-100" id="model-container">
                         <!-- 3D lamp model -->
+                        <!-- FIXME remake this whole 3d model thing -->
                         <canvas id="model"></canvas>
                     </div>
                 </div>
-                <div class="text-center position-absolute bottom-0 start-50 translate-middle">
+                <div class="text-center position-absolute bottom-0 start-50 translate-middle" style="z-index:2;">
                     <div class="text-light p-3 p-md-1 arrow-container">
                         <a href="#features" >
                             <i class="arrow bounce fa fa-arrow-down fa-2x"></i> <br >
-                            <span class="small"> Scroll down </span>
+                            <!--<span class="small"> Scroll down </span>-->
                         </a> 
                       </div>
                 </div>
@@ -85,7 +99,7 @@
 
         <!-- feature section -->
         <section class="page-section" id="features">
-            <div class="container scroll-fade-in scroll-fade-out">
+            <div class="container" data-aos="fade-up" data-aos-once="true">
                 <h2 class="text-center mt-0 fw-bold"> Features </h2>
                 <hr class="divider my-4">
                 <div class="row">
@@ -124,7 +138,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 text-center feature">
                         <div class="mt-5">
-                            <img src="https://dummyimage.com/640x360/fff/aaa" class="img-fluid rounded w-50" alt=""> 
+                            <img src="https://dummyimage.com/640x360/fff/aaa" class="img-fluid rounded w-50" data-aos="fade-down-right" alt=""> 
                             <!-- <img src="assets/img/rainbow-colorful-blocks-abstract-background-d-render-90979057.jpg" class="img-fluid rounded w-50 pb-5" alt="pcb image">-->
                             <!-- <img src="assets/img/icons/colorful-icon-26.png" class="img-fluid rounded pb-5" alt="pcb image"> -->
                             <h3 class="h4 mb-2"> colorful </h3>
@@ -137,7 +151,7 @@
                     <div class="col-lg-6 col-md-6 text-center text-dark feature bg-light">
                         <div class="mt-5">
                             <h3 class="h4 mb-3"> <a href="https://github.com/Aircoookie/WLED" target="_blank" class="link-reverse" rel="noopener noreferrer">WLED</a> Application </h3>
-                            <img src="assets/img/wled-walking-with-iphone-x.jpg" class="img-fluid rounded w-50" alt="">
+                            <img src="assets/img/wled-walking-with-iphone-x.jpg" class="img-fluid rounded w-50" data-aos="fade-down-left" alt="">
                             <p class="text-muted mb-0" style="letter-spacing: 1px;"> Modern UI with color, effect and segment controls <br /> w/ Nightlight function (gradually dims down) </p>
                         </div>
                     </div>
@@ -147,7 +161,7 @@
                     <div class="col-lg-6 col-md-6 order-2 order-md-1 text-center text-dark feature bg-light">
                         <div class="mt-5">
                             <h3 class="h4 mb-2"> Custom PCB <br><sup style="font-size:0.4em;top:-1.8em;">(only Standard or Premium)</sup> </h3>
-                            <img src="/assets/img/platine_02.png" class="img-fluid rounded" style="width: 50%;" alt="pcb image">
+                            <img src="/assets/img/platine_02.png" class="img-fluid rounded" style="width: 50%;" data-aos="fade-up-right" alt="pcb image">
                             <p class="text-muted mb-0"> 
                                 manufactured by  
                                 <a href="https://jlcpcb.com/" target="_blank" rel="noopener noreferrer">
@@ -158,7 +172,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 order-1 order-md-1 text-center feature">
                         <div class="mt-5">
-                            <div class="clock mx-auto mb-5"></div>
+                            <div class="clock mx-auto mb-5" data-aos="fade-up-left" ></div>
                             <h3 class="h4 mb-2"> up to 24h partying time </h3>
                             <p class="text-muted small mb-0">
                                 (depending on the color and effect)
@@ -176,50 +190,51 @@
                     <div class="col-6 col-sm-6 col-lg-4 grid-sizer"></div>
                     <div class="col-6 col-sm-6 col-lg-4 grid-item grid-sizer">
                         <!--<img src="https://dummyimage.com/640x360/343434/aaa" class="img-fluid rounded" alt="">-->
-                        <img src="assets/img/gallery/webp/shisha_01.webp" class="img rounded" alt="" loading="lazy">
+                        <!--<img src="assets/img/gallery/webp/shisha_01.webp" class="img rounded" alt="" loading="lazy">-->
+                        <img data-original="assets/img/gallery/webp/shisha_01.webp" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div> 
                     <div class="col-6 col-sm-6 col-lg-4 grid-item">
                         <!--<img src="https://dummyimage.com/640x360/343434/aaa" class="img-fluid rounded" alt="">-->
-                        <img src="assets/img/gallery/webp/chess_01.webp" class="img rounded" alt="" loading="lazy">
+                        <img data-original="assets/img/gallery/webp/chess_01.webp" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div>
                     <div class="col-6 col-sm-6 col-lg-4 grid-item">
                         <!--<img src="https://dummyimage.com/640x360/343434/aaa" class="img-fluid rounded" alt="">-->
-                        <img src="assets/img/gallery/jpg/20210810_000935.jpg" class="img rounded" alt="" loading="lazy">
+                        <img data-original="assets/img/gallery/jpg/20210810_000935.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div>
                     <div class="col-6 col-sm-6 col-lg-4 grid-item">
                         <!--<img src="https://dummyimage.com/640x360/343434/aaa" class="img-fluid rounded" alt="">-->
-                        <img src="assets/img/gallery/webp/pacala_noah.webp" class="img rounded" alt="" loading="lazy">
+                        <img data-original="assets/img/gallery/webp/pacala_noah.webp" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div>
                     <div class="col-6 col-sm-6 col-lg-4 grid-item">
-                        <img src="https://dummyimage.com/640x360/343434/aaa" class="img-fluid rounded" alt="">
+                        <img data-original="https://dummyimage.com/640x360/343434/aaa" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img-fluid rounded" alt="">
                     </div>                       
                     <div class="col-6 col-sm-6 col-lg-4 grid-item">
                         <!--<img src="https://dummyimage.com/640x360/343434/aaa" class="img-fluid rounded" alt="">-->
-                        <img src="assets/img/gallery/webp/wifi_keys_01.webp" class="img rounded" alt="" loading="lazy">
+                        <img data-original="assets/img/gallery/webp/wifi_keys_01.webp" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div>                
 
                     <!-- Dummy Images -->
                     <div class="col-6 col-sm-6 col-lg-4 grid-item">
                         <!--<img src="https://dummyimage.com/640x360/343434/aaa" class="img-fluid rounded" alt="">-->
-                        <img src="http://lorempixel.com/g/500/250/" class="img rounded" alt="" loading="lazy">
+                        <img data-original="http://lorempixel.com/g/500/250/" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div>
                     <div class="col-6 col-sm-6 col-lg-4 grid-item" >
-                        <img src="http://lorempixel.com/g/500/250/" class="img rounded" alt="" loading="lazy">
+                        <img data-original="http://lorempixel.com/g/500/250/" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div>
                     <div class="col-6 col-sm-6 col-lg-4 grid-item">
-                        <img src="https://dummyimage.com/500x650/000/aaa" class="img rounded" alt="" loading="lazy">
+                        <img data-original="https://dummyimage.com/500x650/000/aaa" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div>
                     <div class="col-6 col-sm-6 col-lg-4 grid-item">
-                        <img src="http://lorempixel.com/g/500/300/" class="img rounded" alt="" loading="lazy">
+                        <img data-original="http://lorempixel.com/g/500/300/" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div>
                     <div class="col-6 col-sm-6 col-lg-4 grid-item">
-                        <img src="https://dummyimage.com/500x650/000/aaa" class="img rounded" alt="" loading="lazy">
+                        <img data-original="https://dummyimage.com/500x650/000/aaa" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div>
                     <div class="col-6 col-sm-6 col-lg-4 grid-item">
-                        <img src="http://lorempixel.com/g/500/200/" class="img rounded" alt="" loading="lazy" >
+                        <img data-original="http://lorempixel.com/g/500/200/" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div>
                     <div class="col-6 col-sm-6 col-lg-4 grid-item">
-                        <img src="http://lorempixel.com/g/500/300/" class="img rounded" alt="" loading="lazy">
+                        <img data-original="http://lorempixel.com/g/500/300/" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" class="img rounded" alt="">
                     </div>
                 </div>
             </div>
@@ -228,21 +243,30 @@
         <!-- about section -->
         <section class="page-section bg-dark text-light" id="about">
             <div class="container">
-                <h2 class="text-center mt-0 fw-bold"> About </h2>
+                <h2 class="text-center mt-0 fw-bold"> What is a PaCaLa? </h2>
                 <hr class="divider my-4">
                 <div class="row text-center">
                     <div class="col">
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum animi dolor odit fugiat maiores veniam <br>
-                            iure! Excepturi, sunt? Reiciendis nisi quaerat aliquid maxime ad sint cupiditate earum totam dolorum optio.<br>
-                            Dori me<br> 
-                            Interimo, adapare<br> 
-                            Dori me<br> 
-                            Ameno AmenoLatire<br> 
-                            Latiremo<br> 
-                            Dori me AmenoOmenare imperavi ameno Dimere, dimere matiroMatiremo<br> 
-                            Ameno Omenare imperavi emulari, ameno Omenare imperavi emulari, amenoAmeno doreAmeno dori meAmeno dori meAmeno dom<br> 
-                            Dori me reoAmeno dori meAmeno dori meDori me am<br>
+                            An ultimate visual experience "<span class="text-highlight"> PaCaLa </span>" is a portable party lamp with over 16 million colours and 100+ dynamic effects<br>
+                            
+                            <p>
+                                splash resistant to most liquids <br>
+                                easy to carry and mount with its practical handle. <br>
+                                designed to withstand camping, festivals, fishing, sailing and indoor use. <br>
+                                offers adjustable brightness and speed to provide enjoyable visual experiences. <br>
+                                Portable, convenient, lightweight and the built-in rechargeable battery means it can go anywhere you go. <br>
+                            </p>
+
+                            Favour innovation and illumination: we do more than just produce portable lamp systems. We create lighting solutions. <br>
+                            Through many years of experience in research and development, we create lighting systems that illuminate your work and hobby. <br>
+                            We developed <span class="text-highlight"> PaCaLa </span> in partnership with adventurers, hookah consumers and campers to evolve portable lighting solutions that can make life easier. <br>
+                            In combination with the latest technologies, we turn these ideas into new lighting solutions. <br>
+                            If you are looking for the perfect combination of portability and functionality, then look no further. These light weight lanterns are the ideal party / camping companion. <br>
+                            Portable atmosphere lamp: it is perfect as a bedside lamp, bedside lamp for children, nursing light, mood light for romantic atmosphere, night lamp for bedroom etc. And while the memory mode remembers the last light setting used <br>
+                        </p>
+                        <p class="text-danger small">                            
+                            Please do not place the lamp in a hot (>55°C), humid environment for a long time.
                         </p>
                     </div>
                 </div>
@@ -252,7 +276,7 @@
 
         <!-- technical specifications section -->
         <section class="page-section" id="tech-specs">
-            <div class="container scroll-fade-in">
+            <div class="container" data-aos="fade-up" data-aos-offset="-500">
                 <h2 class="text-center mt-0 fw-bold"> Technical Specifications </h2>
                 <hr class="divider my-4 mb-5">
                 <div class="row">
@@ -348,8 +372,8 @@
                                     <td> High: 6h, LOW: 24h </td>
                                 </tr>                                
                                 <tr>
-                                    <th scope="row"> ??? </th>
-                                    <td> Garry </td>
+                                    <th scope="row"> Temperature range </th>
+                                    <td> 0°C - 55°C </td>
                                 </tr>
                             </tbody>
                           </table>
@@ -485,7 +509,7 @@
                 </div>
                 <div class="col">
                     <div class="text-center">
-                        Copyright © 2021 - Blubber Lounge 
+                        Copyright © 2021 | Blubber Lounge 
                         <span class="d-block d-md-none">
                             <br />
                             Developed and maintained by 
@@ -525,21 +549,28 @@
 
     
 
+
+    <!-- jQuery -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap Javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <!--<script src="assets\bootstrap-5.1.3\dist\js\bootstrap.min.js" ></script>-->
+
     <!-- imagesLaoded -->
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 
     <!-- Masonry -->
     <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 
-    <!-- Bootstrap Javascript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-    <!--<script src="assets\bootstrap-5.1.3\dist\js\bootstrap.min.js" ></script>-->
-
     <!-- UA-Parser -->
-    <script src="assets\libs\ua-parser-js-master\dist\ua-parser.min.js"></script>
+    <!-- <script src="assets\libs\ua-parser-js-master\dist\ua-parser.min.js"></script> -->
 
-    <!-- jQuery -->
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <!-- AOS (Animate On Scroll) -->
+    <script src="assets/js/aos.js"></script>
+
+    <!-- jquery.lazyload -->
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.lazyload/1.8.4/jquery.lazyload.js"></script>
 
     <!-- Custom Javascript -->
     <script>
@@ -549,6 +580,6 @@
     </script>
     <script src="assets/js/palettes.js"></script>
     <script src="assets/js/script.js"></script>
-    <script src="assets/js/model.js" type="module"></script>
+    <script src="assets/js/temp_model.js" type="module"></script>
 </body>
 </html>

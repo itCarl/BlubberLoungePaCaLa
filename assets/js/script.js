@@ -1,28 +1,15 @@
-/*
- *  'Fancy' console text
- *  some call ist useless... but for us it... it... it's just beautiful.
- */
-console.log([
-    ' ____  _       _     _                 _                                   ',
-    '|  _ \\| |     | |   | |               | |                                 ',
-    '| |_) | |_   _| |__ | |__   ___ _ __  | |     ___  _   _ _ __   __ _  ___ ',
-    '|  _ <| | | | | \'_ \\| \'_ \\ / _ | \'__| | |    / _ \\| | | | \'_ \\ / _` |/ _ \\',
-    '| |_) | | |_| | |_) | |_) |  __| |    | |___| (_) | |_| | | | | (_| |  __/',
-    '|____/|_|\\__,_|_.__/|_.__/ \\___|_|    |______\\___/ \\__,_|_| |_|\\__, |\\___|',
-    '%c   Die aller \'echte\' Shisha bar in Brandenburg und Umgebung   %c __/ | %c      %c',
-    '                                                               |___/      ',
-].join( '\n' ), 
-"color: #fff; background-color: #343434;font-family: monospace; padding:2px; margin-top: 2px;", 
-"color: #000;", 
-"background-color: #343434;",
-"background-color: transparent;");
+
 
 
 /*
- *  Trickery Trick Tricks
+ *  Animate On Scroll Library initialization
  */
-let vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', `${vh}px`);
+AOS.init({
+    disable: 'mobile',
+    easing: 'ease-out-back',
+    duration: 750,
+    mirror: true,
+});
 
 
 
@@ -31,7 +18,7 @@ document.documentElement.style.setProperty('--vh', `${vh}px`);
  */
 $(function()
 {
-    console.log("is Model loaded: " + isModelLoaded);
+    //console.log("is Model loaded: " + isModelLoaded);
 
     /*
      *  Loading Screen
@@ -54,24 +41,53 @@ $(function()
     }
 
 
-
-
     /*
      *  Mansory Image loading Fix 
      */
-    var grid = document.querySelector('#gallery-container');
+    var $grid = $( '#gallery-container' );
+    
+    $grid.imagesLoaded(function(){
+        $grid.masonry({
+            itemSelector: '.grid-item',
+            columnWidth: '.grid-sizer',
+            percentPosition: true
+        });
 
-    var msnry = new Masonry( grid, {
-        itemSelector: '.grid-item',
-        columnWidth: '.grid-sizer',
-        percentPosition: true
+        $('.grid-item img').addClass('not-loaded');
+        
+        $('.grid-item img.not-loaded').lazyload({
+            effect: 'fadeIn',
+            load: function() {
+                // Disable trigger on this image
+                $(this).removeClass("not-loaded");
+                $grid.masonry('layout');
+            }
+        });
+        $('.grid-item img.not-loaded').trigger('scroll');
     });
 
     // imagesLoaded helper
-    imagesLoaded( grid ).on( 'progress', function() {
+    /*imagesLoaded( grid ).on( 'progress', function(ins, image) {
         // layout Masonry after each image loads
-        msnry.layout();
+         msnry.layout();
+         var result = image.isLoaded ? 'loaded' : 'broken';
+         console.log( 'image is ' + result + ' for ' + image.img.src );
     });
+
+    
+    const observer = lozad(); // lazy loads elements with default selector as ".lozad"
+    observer.observe();
+
+    lozad('.lozad', {
+        loaded: function(el) {
+            // Custom implementation on a loaded element
+            msnry.layout();
+        }
+    });*/
+
+
+
+
 
 
 
@@ -80,6 +96,7 @@ $(function()
      *   
      *  probably raplacing this below to this lib (https://github.com/michalsnik/aos) later 
      */
+    /* got replaced by AOS lib
     $(window).scroll(function() {
         $('.scroll-fade-in').each(function() {
             var top_of_element = $(this).offset().top;
@@ -100,4 +117,46 @@ $(function()
         //$('.scroll-fade-out').css("opacity", 1 - $(window).scrollTop() / 250);
 
     });
+    */
 });
+
+
+
+
+
+
+
+
+
+/*
+ *  Trickery Trick Tricks
+ */
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+
+
+
+
+
+
+
+
+/*
+ *  'Fancy' console text
+ *  some call ist useless... but for us it... it... it's just beautiful.
+ */
+console.log([
+    ' ____  _       _     _                 _                                   ',
+    '|  _ \\| |     | |   | |               | |                                 ',
+    '| |_) | |_   _| |__ | |__   ___ _ __  | |     ___  _   _ _ __   __ _  ___ ',
+    '|  _ <| | | | | \'_ \\| \'_ \\ / _ | \'__| | |    / _ \\| | | | \'_ \\ / _` |/ _ \\',
+    '| |_) | | |_| | |_) | |_) |  __| |    | |___| (_) | |_| | | | | (_| |  __/',
+    '|____/|_|\\__,_|_.__/|_.__/ \\___|_|    |______\\___/ \\__,_|_| |_|\\__, |\\___|',
+    '%c   Die aller \'echte\' Shisha bar in Brandenburg und Umgebung   %c __/ | %c      %c',
+    '                                                               |___/      ',
+].join( '\n' ), 
+"color: #fff; background-color: #343434;font-family: monospace; padding:2px; margin-top: 2px;", 
+"color: #000;", 
+"background-color: #343434;",
+"background-color: transparent;");

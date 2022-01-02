@@ -12,6 +12,10 @@
     
     --clr-primary: rgb(52, 52, 52);
     --clr-secondary: rgb(173,255,47);
+    
+    --clr-scrollbar-track: rgb(52, 52, 52);
+    --clr-scrollbar-thumb: rgba(153, 153, 153, 1);
+    --clr-scrollbar-thumb-inactive: rgba(153, 153, 153, .6);
 }
 
 /* 
@@ -72,6 +76,31 @@ img {
     color: var(--clr-primary);
     background-color: var(--clr-secondary);
 }
+
+/*
+::-webkit-scrollbar {
+    width: 15px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+    border-left: 5px solid var(--clr-scrollbar-track);
+    border-right: 5px solid var(--clr-scrollbar-track);
+    border-top: 1px solid var(--clr-scrollbar-track);
+    border-bottom: 1px solid var(--clr-scrollbar-track);
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #343434;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background-color: #ccc;
+}
+*/
 
 html,
 body {
@@ -938,6 +967,7 @@ i.icon {
     background-color: #be3730;
     width: 120px;
 }
+
 
 
 

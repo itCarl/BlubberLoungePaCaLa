@@ -6,6 +6,7 @@
  */
 
 import * as THREE from '../three/build/three.module.js';
+import * as palettes from '../js/palettes.js';
 
 
 class pacalaLight 
@@ -482,8 +483,13 @@ class segment
 {
     start;
     stop;
-    palette;
-    lights;
+    palette = 0;
+
+    constructor() 
+    {
+
+    }
+
 
 }
 
